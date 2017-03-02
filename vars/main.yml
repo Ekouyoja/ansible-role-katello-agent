@@ -1,0 +1,12 @@
+---
+# Just replace ip
+url_to_katello_serv_ca_consumer:
+  - http://172.16.220.179/pub/katello-ca-consumer-latest.noarch.rpm
+
+subscription_centos6:
+  org_id: Default_Organization
+  activationkey: CentOS_6_recette
+  
+subscription_centos7:
+  org_id: Default_Organization
+  activationkey: CentOS_7_recette

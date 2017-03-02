@@ -1,0 +1,36 @@
+---
+
+- name: Création du repo epel CentOS6 pour subscription-manager
+  copy:
+    src: defaults/epel6.repo
+    dest: /etc/yum.repos.d/dgoodwin-subscription-manager-epel-6.repo
+    owner: root
+    group: root
+    mode: 0644
+  when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
+
+- name: Installation de Subscription-manager
+  yum: name=subscription-manager state=latest 
+  
+- name: Installation du certificat du serveur Katello
+  yum: name="{{url_to_katello_serv_ca_consumer}}" state=installed
+
+#- redhat_subscription: 
+#    state: present
+#    org_id: "{{ subscription_centos6.org_id }}"
+#    activationkey: "{{ subscription_centos6.activationkey }}"
+#    #force_register: true
+#  when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
+
+- redhat_subscription: 
+    state: present
+    org_id: "{{ subscription_centos7.org_id }}"
+    activationkey: "{{ subscription_centos7.activationkey }}"
+    #force_register: true
+  when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
+
+# Before you need to set up katello-client repo in your Katello-server and attach it to your activation key
+- name: Installation de Katello client
+  yum: name=katello-agent state=latest
+  notify: start enable goferd
+  

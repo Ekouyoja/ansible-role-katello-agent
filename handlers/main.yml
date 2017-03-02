@@ -1,0 +1,5 @@
+---
+#Nom du handler
+- name: start enable goferd
+  service: name=goferd state=started enabled=yes
+

@@ -1,0 +1,8 @@
+---
+- name: Install du role katello
+  hosts: group_A
+  become: true
+  remote_user: ansible
+  roles: 
+     - katello
+
