@@ -4,5 +4,5 @@
   become: true
   remote_user: ansible
   roles: 
-     - katello_agent
+     - *katello_agent
 
